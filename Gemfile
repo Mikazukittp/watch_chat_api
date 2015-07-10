@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'rails', '4.1.8'
 gem 'rpush'
 gem 'sass-rails', '~> 4.0.3'
+gem 'seed-fu'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'sqlite3'
 gem 'spring',        group: :development
