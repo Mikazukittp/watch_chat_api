@@ -23,4 +23,5 @@ group :deployment do
   gem 'capistrano-bundler'
 end
 
-# gem 'therubyracer',  platforms: :ruby
+gem 'therubyracer', '0.11.1'
+gem 'libv8', '~> 3.11.8.13'
