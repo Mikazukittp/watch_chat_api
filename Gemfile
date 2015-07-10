@@ -15,4 +15,4 @@ gem 'sqlite3'
 gem 'spring',        group: :development
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
-# gem 'therubyracer',  platforms: :ruby
+gem 'therubyracer',  platforms: :ruby
