@@ -1,7 +1,7 @@
 # android用の記述
 Rpush::Gcm::App.seed do |s|
   s.name = "android_app"
-  s.auth_key = "fugahoge"
+  s.auth_key = "AIzaSyArjiD7tb5XDwXIdh2t6ugQNZx4KQzqwYM"
   s.connections = 1
 end
 
