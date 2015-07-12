@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       namespace :a do
         resource :device_token, only: [:update]
         resource :message, only: [:index, :show, :create]
+        resource :users
       end
 
       namespace :i do
