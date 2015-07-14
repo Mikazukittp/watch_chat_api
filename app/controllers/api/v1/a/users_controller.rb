@@ -4,23 +4,11 @@ class Api::V1::A::UsersController < ApplicationController
 	##ユーザー登録処理
 	#POST /api/vi/a/users/
 	def create
-
 		@newUser = User.create(user_params)
-		respond_to do |format|
-				format.json { render json: @newUser } # JSON形式
-			end
+		render :json => @newUser, status: :created # JSON形式
 	end
 
 	def user_params
- 		params.permit(:name,:gcm_id)
-	end
-
-	##テストメソッド
-	#GET /api/vi/a/users/hello
-	def hello
-		render :text => "hello"
-	end
-	def bye
-		render :text => "byebye"
+ 		params.permit(:name, :gcm_id)
 	end
 end
