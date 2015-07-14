@@ -1,6 +1,8 @@
 class Api::V1::A::MessagesController < Api::V1::A::BaseController
 
   def index
+    @messages = Message.where(sender_id: params[:sender_id])
+    render :json => @messages
   end
 
   def show

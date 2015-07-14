@@ -13,15 +13,18 @@
 
 ActiveRecord::Schema.define(version: 20150713140308) do
 
-  create_table "messages", force: true do |t|
-    t.integer  "sender_id"
-    t.integer  "opponent_id"
-    t.text     "content"
-
   create_table "Users", force: true do |t|
     t.string   "name",        null: false
     t.string   "gcm_id",      null: false
     t.integer  "relation_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", force: true do |t|
+    t.integer  "sender_id"
+    t.integer  "opponent_id"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
