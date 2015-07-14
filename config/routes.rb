@@ -4,6 +4,12 @@ Rails.application.routes.draw do
       namespace :a do
         resource :device_token, only: [:update]
         resource :message, only: [:index, :show, :create]
+        resources :users do
+          ##テスト用のパス
+          collection do
+            get:hello
+          end
+        end
       end
 
       namespace :i do
