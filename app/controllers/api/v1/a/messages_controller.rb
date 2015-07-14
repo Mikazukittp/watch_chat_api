@@ -1,6 +1,8 @@
-class Api::V1::A::MessagesController < ApplicationController
+class Api::V1::A::MessagesController < Api::V1::A::BaseController
 
   def index
+    @messages = Message.where(sender_id: params[:sender_id])
+    render :json => @messages
   end
 
   def show
@@ -8,26 +10,21 @@ class Api::V1::A::MessagesController < ApplicationController
 
   def create
 
-    data = { message: "やっほー松田翔太だよー" }
-    send_push(params.require(:registration_ids), data)
+    @message = Message.new(message_params)
+    @message.opponent_id = User.find(params[:sender_id]).relation_id
 
-    @hogehoge = { :result => "プッシュ通知飛んだかな？"}
-    render :json => @hogehoge, status: :ok
+    @message.save
 
+    data = { message: params[:content] }
+    send_push(User.find(@message.opponent_id).gcm_id, data)
+
+    render :json => @message, status: :ok
   end
 
   private
 
-  def send_push(registration_ids, data)
-    n = Rpush::Gcm::Notification.new
-    n.app = Rpush::Gcm::App.find_by_name("android_app")  # Rpush::GCM::Appインスタンスを設定
-    n.registration_ids = [registration_ids] # registration_idを設定
-    n.data = { message: "やっほー松田翔太だよー" } # カスタムデータ
-    n.save!
-  end
-
-  def user_params
-      params.permit(:registration_ids)
+  def message_params
+    params.require(:message).permit(:sender_id, :content)
   end
 
 end
