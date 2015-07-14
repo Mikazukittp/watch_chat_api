@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       namespace :a do
+        resources :messages, only: [:index, :show, :create]
         resource :device_token, only: [:update]
-        resource :message, only: [:index, :show, :create]
         resources :users do
           ##テスト用のパス
           collection do
@@ -12,9 +12,8 @@ Rails.application.routes.draw do
         end
       end
 
-      namespace :i do
-        resource :device_token, only: [:update]
-        resource :message, only: [:index, :show, :create]
+      namespace :i  do
+        resources :messages, only: [:index, :show, :create]
       end
     end
   end

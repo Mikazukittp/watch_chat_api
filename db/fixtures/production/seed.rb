@@ -10,7 +10,6 @@ Rpush::Apns::App.seed do |s|
   s.name = "ios_app"
   s.certificate = File.read(Rails.root.join('certificates', 'apns', "sandbox.pem"))
   s.environment = "sandbox"
-  s.password = "certificate password"
-  s.auth_key = "fugahoge"
+  s.password = "Mfc03641"
   s.connections = 1
 end
