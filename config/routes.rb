@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :a do
         resources :messages, only: [:index, :show, :create]
-        resource :collections, only: [:show, :create, :delete]
+        resource :collection, only: [:show, :create, :delete]
         resources :users do
           ##テスト用のパス
           collection do
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
       namespace :i  do
         resources :messages, only: [:index, :show, :create]
-        resource :collections, only: [:show, :create, :delete]
+        resource :collection, only: [:show, :create, :delete]
       end
     end
   end
