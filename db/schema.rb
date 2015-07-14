@@ -17,6 +17,11 @@ ActiveRecord::Schema.define(version: 20150713140308) do
     t.integer  "sender_id"
     t.integer  "opponent_id"
     t.text     "content"
+
+  create_table "Users", force: true do |t|
+    t.string   "name",        null: false
+    t.string   "gcm_id",      null: false
+    t.integer  "relation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
