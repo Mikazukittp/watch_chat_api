@@ -5,10 +5,13 @@ class Api::V1::A::ConnectionsController < Api::V1::A::BaseController
 
   def create
     @sendUser = User.find(params[:id])
-    
-    receiveUserCandidate = User.where(relation_id: nil)
-    rand_num = rand(receiveUserCandidate.size) - 1
-    @receiveUser = receiveUserCandidate[rand_num]
+    if @sendUser.relation_id.present?
+      render_500({message: 'You have already connected to user(id: #{@sendUser.relation_id})'})
+    end
+    @receiveUser = User.where(relation_id: nil).sample
+    if @receiveuser.blank?
+      render_404({message: 'No conectable user.'})
+    end
 
     ##@sendUserのrelation_idに、receiveUserのidを代入。@receiveUserのrelation_idにsendUserのidを代入
     User.transaction do
@@ -36,5 +39,3 @@ class Api::V1::A::ConnectionsController < Api::V1::A::BaseController
     rescue => e
       render_500(e)
   end
-
-end
