@@ -1,4 +1,4 @@
-class Api::V1::A::BaseController < ApplicationController
+class Api::V1::BaseController < ApplicationController
 
   def send_push_a(registration_ids, data)
     n = Rpush::Gcm::Notification.new
@@ -8,12 +8,12 @@ class Api::V1::A::BaseController < ApplicationController
     n.save!
   end
 
-  def send_push_i(device_token, alert)
+  def send_push_i(device_token, alert, push_type)
     n = Rpush::Apns::Notification.new
     n.app = Rpush::Apns::App.find_by_name("ios_app") # Rpush::Apns::Appインスタンスを設定
     n.device_token = device_token # デバイストークン
     n.alert = alert  # プッシュメッセージ
-    n.data = { category: :remotePush } # カスタムデータ
+    n.data = { category: :remotePush, push_type: push_type } # カスタムデータ
     n.save!
   end
 

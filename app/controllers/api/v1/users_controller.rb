@@ -1,4 +1,4 @@
-class Api::V1::A::UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
 	##userCreate時にUsersTableにuserオブジェクトを突っ込み、userオブジェクトを返却するメソッド
 
 	##ユーザー登録処理
