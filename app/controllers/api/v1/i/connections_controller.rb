@@ -20,6 +20,8 @@ class Api::V1::I::ConnectionsController < Api::V1::I::BaseController
       @receiveUser.update!(relation_id: @sendUser.id)
     end
 
+    send_push(@receiveUser.gcm_id, "#{@sendUser.name}さんとつながりました！")
+
     render json: @receiveUser, status: :created
 
   rescue => e
