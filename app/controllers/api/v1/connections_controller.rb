@@ -1,4 +1,4 @@
-class Api::V1::I::ConnectionsController < Api::V1::I::BaseController
+class Api::V1::ConnectionsController < Api::V1::BaseController
 
   def show
   end
@@ -20,7 +20,13 @@ class Api::V1::I::ConnectionsController < Api::V1::I::BaseController
       @receiveUser.update!(relation_id: @sendUser.id)
     end
 
-    send_push(@receiveUser.gcm_id, "#{@sendUser.name}さんとつながりました！")
+    case @receiveUser.device_type
+    when "android"
+      data = { message: "#{@sendUser.name}さんとつながりました！", push_type: "connect" }
+      send_push_a(@receiveUser.gcm_id, data)
+    when "ios"
+      send_push_i(@receiveUser.gcm_id, "#{@sendUser.name}さんとつながりました！", "connect")
+    end
 
     render json: @receiveUser, status: :created
 
@@ -37,6 +43,15 @@ class Api::V1::I::ConnectionsController < Api::V1::I::BaseController
       @user.update!(relation_id: nil)
       @opponent.update!(relation_id: nil)
     end
+
+    case @opponent.device_type
+    when "android"
+      data = { message: "#{@opponent.name}さんとの接続が切れました", push_type: "delete" }
+      send_push_a(@opponent.gcm_id, data)
+    when "ios"
+      send_push_i(@opponent.gcm_id, "#{@opponent.name}さんとの接続が切れました", "delete")
+    end
+
     render json: @opponent, status: :ok
 
     rescue => e
