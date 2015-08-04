@@ -12,13 +12,19 @@ class Api::V1::UsersController < ApplicationController
 		render :json => @newUser, status: :created # JSON形式
 	end
 
-	def opponent
-        @user = User.find(params[:id])
-        @opponent = User.find(@user.relation_id)
-        render json: @opponent
-    end
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    render :json => @user, status: 200
+  end
 
-    private
+	def opponent
+      @user = User.find(params[:id])
+      @opponent = User.find(@user.relation_id)
+      render json: @opponent
+  end
+
+  private
 
 	def user_params
  		params.permit(:name, :gcm_id, :device_type)
