@@ -4,7 +4,7 @@ class Api::V1::MessagesController < Api::V1::BaseController
     #究極に書き直したいが暫定的に
     sender = User.find(params[:sender_id])
     @messages = Message.where('sender_id = ? or sender_id = ?', sender.id, sender.relation_id)
-    .where('opponent_id = ? or opponent_id = ?', sender.id, sender.relation_id).limit(10)
+    .where('opponent_id = ? or opponent_id = ?', sender.id, sender.relation_id)
 
     render :json => @messages
   end
