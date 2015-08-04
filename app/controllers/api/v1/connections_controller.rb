@@ -35,7 +35,6 @@ class Api::V1::ConnectionsController < Api::V1::BaseController
   end
 
   def destroy
-
     @user = User.find(params[:id])
     @opponent = User.find(@user.relation_id)
 
@@ -46,10 +45,10 @@ class Api::V1::ConnectionsController < Api::V1::BaseController
 
     case @opponent.device_type
     when "android"
-      data = { message: "#{@opponent.name}さんとの接続が切れました", push_type: "delete" }
+      data = { message: "#{@user.name}さんとの接続が切れました", push_type: "delete" }
       send_push_a(@opponent.gcm_id, data)
     when "ios"
-      send_push_i(@opponent.gcm_id, "#{@opponent.name}さんとの接続が切れました", "delete")
+      send_push_i(@opponent.gcm_id, "#{@user.name}さんとの接続が切れました", "delete")
     end
 
     render json: @opponent, status: :ok
