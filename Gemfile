@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 gem 'apns'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'dotenv-rails'
 gem 'gcm'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
