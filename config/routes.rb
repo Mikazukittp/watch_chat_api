@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :messages, only: [:index, :show, :create]
       resources :connections, only: [:show, :create, :destroy]
+      resources :reports, only: [:create]
       resources :users do
         get 'opponent', on: :member
       end
