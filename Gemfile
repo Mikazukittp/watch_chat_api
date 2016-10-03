@@ -17,5 +17,5 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
 #問題児たち。バージョン注意！
-gem 'therubyracer', '0.11.1'
-gem 'libv8', '~> 3.11.8.13'
+# gem 'therubyracer', '0.11.1'
+# gem 'libv8', '~> 3.11.8.13'
